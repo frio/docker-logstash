@@ -1,15 +1,19 @@
-FROM base
+FROM frio/openjdk-7-jre
+
 MAINTAINER Arcus "http://arcus.io"
-RUN echo "deb http://archive.ubuntu.com/ubuntu quantal main universe multiverse" > /etc/apt/sources.list
+MAINTAINER frio "http://frio.name"
+
 RUN apt-get update
-RUN apt-get install -y wget openjdk-6-jre
-RUN wget http://logstash.objects.dreamhost.com/release/logstash-1.1.13-flatjar.jar -O /opt/logstash.jar --no-check-certificate
-ADD run.sh /usr/local/bin/run
-RUN chmod +x /usr/local/bin/run
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install curl
+
+RUN curl https://download.elasticsearch.org/logstash/logstash/packages/debian/logstash_1.3.3-1-debian_all.deb -o /tmp/logstash_1.3.3-1-debian_all.deb
+RUN dpkg -i /tmp/logstash_1.3.3-1-debian_all.deb
 RUN rm -rf /tmp/*
 
+ADD run.sh /run.sh
+RUN chmod +x /run.sh
+
 EXPOSE 514
-EXPOSE 9200
 EXPOSE 9292
-EXPOSE 9300
-CMD ["/usr/local/bin/run"]
+
+ENTRYPOINT /run.sh

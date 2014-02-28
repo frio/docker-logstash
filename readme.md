@@ -1,16 +1,4 @@
 # Logstash
+A minimal installation of Logstash 1.3.3.  Depends on an external elasticsearch; preferably, the one from [frio/elasticsearch][1].
 
-Logstash 1.1.13
-
-
-* `docker build -t logstash .`
-* `docker run logstash`
- or with an external elasticsearch
-* `docker run -e ES_HOST=1.2.3.4 -e ES_PORT=9300 logstash`
-
-Ports
-
-* 514 (syslog)
-* 9200 (embedded elasticsearch if no external specified)
-* 9292 (logstash ui)
-* 9300 (embedded elasticsearch if no external specified)
+[1]: http://github.com/frio/docker-elasticsearch
