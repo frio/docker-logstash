@@ -1,4 +1,4 @@
-FROM frio/openjdk-7-jre
+FROM frio/openjdk-7-jre:latest
 
 MAINTAINER Arcus "http://arcus.io"
 MAINTAINER frio "http://frio.name"
