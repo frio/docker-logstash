@@ -17,10 +17,10 @@ input {
   }
 }
 output {
-  stdout { debug => true debug_format => "json"}
-  elasticsearch_http { host => "$ES_HOST" port => $ES_PORT }
+  stdout { }
+  elasticsearch { host => "$ES_HOST" port => $ES_PORT }
 }
 EOF
 fi
 
-/usr/bin/java -jar /opt/logstash/logstash.jar agent -f /etc/logstash/conf.d/ -- web
+/opt/logstash/bin/logstash agent -f /etc/logstash/conf.d/ -- web
