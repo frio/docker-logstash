@@ -1,7 +1,5 @@
 #!/bin/bash
 CFG=${CFG:-}
-ES_HOST=${ES_PORT_9200_TCP_ADDR:-127.0.0.1}
-ES_PORT=${ES_PORT_9200_TCP_PORT:-9200}
 
 if [ "$CFG" != "" ]; then
     echo "Grabbing config from $CFG"
@@ -19,7 +17,7 @@ input {
 }
 output {
   stdout { }
-  elasticsearch { host => "$ES_HOST" port => $ES_PORT }
+  elasticsearch { embedded => true }
 }
 EOF
 fi
