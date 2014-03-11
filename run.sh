@@ -1,5 +1,7 @@
 #!/bin/bash
 CFG=${CFG:-}
+ES_HOST=${ES_PORT_9200_TCP_ADDR:-127.0.0.1}
+ES_PORT=${ES_PORT_9200_TCP_PORT:-9200}
 
 if [ "$CFG" != "" ]; then
     echo "Grabbing config from $CFG"
@@ -17,9 +19,13 @@ input {
 }
 output {
   stdout { }
-  elasticsearch { embedded => true }
+  elasticsearch { 
+    host => "$ES_HOST" 
+	port => $ES_PORT
+  }
 }
 EOF
 fi
 
 /opt/logstash/bin/logstash agent -f /etc/logstash/conf.d/ -- web
+
