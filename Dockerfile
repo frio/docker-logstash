@@ -17,11 +17,14 @@ RUN mkdir -p /etc/logstash/conf.d/
 # Also, we'll need to patch up the Logstash install as per LOGSTASH-1918
 RUN GEM_HOME=/opt/logstash/vendor/bundle/jruby/1.9 GEM_PATH="" java -jar /opt/logstash/vendor/jar/jruby-complete-1.7.11.jar -S gem install sinatra rack
 
-ADD run.sh /run.sh
-RUN chmod +x /run.sh
+# I ended up using Python to enable some functionality I wanted
+# I should've used an already-installed environment.  Sigh.
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y python
+
+ADD run.py /run.py
+RUN chmod +x /run.py
 
 EXPOSE 514
 EXPOSE 9292
 
-ENTRYPOINT /run.sh
-
+ENTRYPOINT /run.py
