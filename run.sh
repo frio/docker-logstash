@@ -4,7 +4,8 @@ ES_HOST=${ES_PORT_9200_TCP_ADDR:-127.0.0.1}
 ES_PORT=${ES_PORT_9200_TCP_PORT:-9200}
 
 if [ "$CFG" != "" ]; then
-    curl $CFG -o /etc/logstash/conf.d/logstash.conf --no-check-certificate
+    echo "Grabbing config from $CFG"
+    curl $CFG -o /etc/logstash/conf.d/logstash.conf
 else
     cat << EOF > /etc/logstash/conf.d/logstash.conf
 input {
