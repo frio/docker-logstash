@@ -25,6 +25,7 @@ except KeyError as e:
     config = DEMO_CONFIG
 
 # Subsitute in strings that need replacing from the ENV
+# This lets you put stuff like, for instance, %{ELASTICSEARCH_HOST} in your config
 config = Template(config).substitute(os.environ)
 
 with open(CONFIG_FILE_LOCATION, 'w') as fh:
